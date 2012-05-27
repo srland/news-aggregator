@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<h1>{% block title %}{% blocktrans %}Posts with &laquo;{{ tag }}&raquo; label{% endblocktrans %}{% endblock title %}</h1>
+{% if page.object_list %}
+    {% for post in page.object_list %}
+    {% include 'feedzilla/post_template.html' %}
+    {% endfor %}
+    {% include "common/pagination.html" %}
+{% else %}
+    <p>{% trans "No posts with such label" %}</p>
+{% endif %}
+{% endblock %}
+

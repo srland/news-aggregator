@@ -1,0 +1,16 @@
+{% load i18n %}
+
+<div class="pagination">
+
+    {% if page.has_previous %}
+    <a href="?page={{ page.previous_page_number }}">&laquo; {% trans "Newer" %}</a>
+    {% endif %}
+
+    <span>{% blocktrans with page.start_index as start and page.end_index as end and paginator.count as count %}Posts <strong>{{ start }}</strong> - <strong>{{ end }}</strong> of <strong>{{ count }}{% endblocktrans %}</strong>
+    </span>
+
+    {% if page.has_next %}
+    <a href="?page={{ page.next_page_number }}">{% trans "Older" %} &raquo;</a>
+    {% endif %}
+
+</div>

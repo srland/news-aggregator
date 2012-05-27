@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<h1>{% block title %}{% trans "Sources" %}{% endblock %}</h1>
+<div class="divider2"></div>
+<div class="contentarea">
+    <ul>
+        {% for feed in feed %}
+        <li style="line-height: 1.6em">
+            <a href="{{ feed.site_url }}">{{ feed.title }}</a>
+            &nbsp;
+            ({{ feed.post_count }})
+            &nbsp;
+            <a href="{{ feed.feed_url }}">
+                <img style="position: relative; top: 3px" src="{{ MEDIA_URL }}img/feed-icon-small.png" />
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% load tagging_tags %}
+{% load i18n %}
+{% load feedzilla_tags i18n %}
+
+<h1><img src="/media/iportal/default/img/live-update.png" alt="{% trans "Live Update" %}" /><a href="{% url feedzilla_sources %}">{% trans "Lifestream" %}</a></h1>
+{% comment %}customize{% endcomment %}
+<ul>
+{% for post in page.object_list %}
+			<li class="li-article">                    
+                <div class="article">
+                        <span class="meta align-right">{{ post.created|naturalTimeDifference }}<a href="{{ post.feed.site_url }}" title="{{ post.feed.author_or_title }}"><img class="favicon" src="http://www.google.com/s2/favicons?domain={{ post.feed.site_hostname }}" onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100" onmouseout="this.style.opacity=0.4;this.filters.alpha.opacity=40"/></a></span>
+                        <h2><a class="read-link" href="{{ post.get_absolute_url }}">{{ post.title }} {% comment %}<img class="favicon" src="{{ MEDIA_URL }}img/offsite.gif" alt="{% trans "Offsite" %}" />{% endcomment %}</a></h2>
+                        <div class="article-content alignleft">
+                        {{ post.content|truncatewords_html:40|safe }}
+                        <span><a class="read-link-more" href="{{ post.get_absolute_url }}">Continue reading &raquo;</a></span>
+                        </div>
+                        <p> 
+                        {% comment %}in <a href="#">IT(Uncategorized)</a>{% endcomment %} 
+                        {% comment %}&#183; Tag1 &#183; Tag 2 &#183; Tag 3 <!--[hover:&#183; more]-->{% endcomment %}
+                        </p>
+                        <div>
+                        
+                        {% comment %}<p>Comment Share[:twitter,email,facebook] Remove</p><!---->{% endcomment %}
+                        {% comment %}<p>View Comments | 6 people likes this</p>
+                        <p>View All Comments</p>{% endcomment %}
+                        </div>
+                </div>
+                
+                <div class="clear"></div>
+            </li>
+{% endfor %}
+</ul>

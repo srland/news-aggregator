@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block head_extra %}
+<script type="text/javascript" src="{{ MEDIA_URL }}feedzilla/js/jquery.highlight-2.js"></script>
+<script type="text/javascript">
+$(function() {
+    var query = '{{ query.upper|addslashes|safe }}';
+    $('.post .content').each(function() {
+        $.highlight(this, query);
+    });
+});
+</script>
+{% endblock %}
+
+{% block query_value %}{{ query }}{% endblock %}
+
+{% block content %}
+<h1>{% block title %}{% blocktrans %}Search for &laquo;{{ query }}&raquo;{% endblocktrans %}{% endblock %}</h1>
+
+<div class="divider2"></div>
+{% if page.object_list %}
+    {% for post in page.object_list %}
+    {% include 'feedzilla/post_template.html' %}
+    {% endfor %}
+    {% include "common/pagination.html" %}
+{% else %}
+    <p>{% if message %}{{ message }}{% else %}{% trans "Nothing was found" %}{% endif %}</p>
+{% endif %}
+{% endblock %}
